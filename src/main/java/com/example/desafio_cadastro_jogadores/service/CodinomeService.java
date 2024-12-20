@@ -3,6 +3,7 @@ package com.example.desafio_cadastro_jogadores.service;
 import com.example.desafio_cadastro_jogadores.model.GrupoCodinome;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,5 +16,20 @@ public class CodinomeService {
 
         var codinomeSorteado = sortearCodinome(codinomesDisponiveis);
         return codinomeSorteado;
+    }
+
+    private List<String> listarCodinomesDisponiveis(GrupoCodinome grupoCodinome, List<String> codinomesEmUso) {
+        var codinomes = buscarCodinomes(grupoCodinome);
+
+        var codinomesDisponiveis = codinomes
+                .stream()
+                .filter(codinome -> !codinomesEmUso.contains(codinome))
+                .toList();
+
+        return codinomesDisponiveis;
+    }
+
+    private List<String> buscarCodinomes(GrupoCodinome grupoCodinome) {
+        var codinomeRepository = codinomeRepositoryFactory.create(grupoCodinome);
     }
 }
