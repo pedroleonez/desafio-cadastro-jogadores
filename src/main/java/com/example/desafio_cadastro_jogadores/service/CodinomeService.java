@@ -8,6 +8,11 @@ import java.util.List;
 
 @Service
 public class CodinomeService {
+    private final CodinomeRepositoryFactory codinomeRepositoryFactory;
+
+    public CodinomeService(CodinomeRepositoryFactory codinomeRepositoryFactory) {
+        this.codinomeRepositoryFactory = codinomeRepositoryFactory;
+    }
 
     public String gerarCodinome(GrupoCodinome grupoCodinome, List<String> codinomesEmUso) {
         var codinomesDisponiveis = listarCodinomesDisponiveis(grupoCodinome, codinomesEmUso);
